@@ -70,3 +70,8 @@ input
 {
   padding: 5px 10px;
 }
+td{
+  padding: 10px;
+  border: 1px solid white;
+
+}
