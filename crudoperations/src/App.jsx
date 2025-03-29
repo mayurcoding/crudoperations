@@ -83,19 +83,21 @@ function App() {
               <td>Email</td>
               <td>Phone</td>
               <td>Password</td>
+              <td>Actions</td>
             </tr>
           </thead>
-          <tbody>{users.map((item, index) => (
-            <tr>
-              <td>{index+1}</td>
-              <td>{item.name}</td>
-              <td>{item.email}</td>
-              <td>{item.phone}</td>
-              <td>{item.password}</td>
-
-            </tr>
-
-          ))}</tbody>
+          <tbody>
+            {users.map((item, index) => (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.phone}</td>
+                <td>{item.password}</td>
+                <td><button>Edit</button><button>Delete</button></td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
