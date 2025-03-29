@@ -17,7 +17,7 @@ function App() {
     console.log(user);
   };
   return (
-    <>
+    <div div className="container">
       <div className="form">
         <form onSubmit={handleSubmit}>
           <input
@@ -59,7 +59,22 @@ function App() {
           <button>Save</button>
         </form>
       </div>
-    </>
+
+      <div className="table">
+      <table>
+        <thead>
+
+          
+        </thead>
+
+
+
+
+      </table>
+    
+
+      </div>
+    </div>
   );
 }
 
