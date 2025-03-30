@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { UserContext } from "../Context/UserContextProvider"
+import { UserContext } from "../../Context/UserContextProvider"
 
 
 const Table = () => {
