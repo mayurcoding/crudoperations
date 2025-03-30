@@ -16,7 +16,7 @@ function App() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUsers([...users, { ...user, id: crypto.randomUID() }]);
+    setUsers([...users, { ...user, id: crypto.randomUUID() }]);
     setUser({
       name: "",
       email: "",
@@ -25,8 +25,11 @@ function App() {
     });
   };
 
-  const handleDelete = () => {
-    console.log("deleted");
+  const handleDelete = (id) => {
+    const updateUsers = users.filter((item)=>{
+      return id !== item.id
+    })
+    setUsers(updateUsers)
   };
 
   useEffect(() => {
@@ -107,7 +110,7 @@ function App() {
                   }}
                 >
                   <button>Edit</button>
-                  <button onClick={handleDelete}>Delete</button>
+                  <button onClick={()=>handleDelete(item.id)}>Delete</button>
                 </td>
               </tr>
             ))}
