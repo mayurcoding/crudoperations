@@ -8,15 +8,25 @@ function App() {
     phone: "",
     password: "",
   });
+
   const [users, setUsers] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUsers([...users, { ...user, id: crypto.randomUUID() }]);
+    if (user.id) {
+      const updateUsers = users.map((item) =>
+        item.id === user.id ? { ...user } : item
+      );
+      setUsers(updateUsers);
+    } else {
+      setUsers([...users, { ...user, id: crypto.randomUUID() }]);
+    }
+
     setUser({
       name: "",
       email: "",
@@ -26,17 +36,20 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    const updateUsers = users.filter((item)=>{
-      return id !== item.id
-    })
-    setUsers(updateUsers)
+    const updateUsers = users.filter((item) => item.id !== id);
+    setUsers(updateUsers);
+  };
+
+  const handleEdit = (item) => {
+    setUser(item); // Fix here
   };
 
   useEffect(() => {
     console.log(users);
   }, [users]);
+
   return (
-    <div div className="container">
+    <div className="container">
       <div className="form">
         <h1>Creation Of Records</h1>
         <form onSubmit={handleSubmit}>
@@ -76,7 +89,7 @@ function App() {
           />
           <br />
           <br />
-          <button>Save</button>
+          <button>{user.id ? "Update" : "Save"}</button>
         </form>
       </div>
 
@@ -95,7 +108,7 @@ function App() {
           </thead>
           <tbody>
             {users.map((item, index) => (
-              <tr key={index}>
+              <tr key={item.id}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
@@ -109,8 +122,8 @@ function App() {
                     gap: "5px",
                   }}
                 >
-                  <button>Edit</button>
-                  <button onClick={()=>handleDelete(item.id)}>Delete</button>
+                  <button onClick={() => handleEdit(item)}>Edit</button>
+                  <button onClick={() => handleDelete(item.id)}>Delete</button>
                 </td>
               </tr>
             ))}
