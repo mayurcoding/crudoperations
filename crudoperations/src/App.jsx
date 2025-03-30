@@ -16,13 +16,17 @@ function App() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUsers([...users, user]);
+    setUsers([...users, { ...user, id: crypto.randomUID() }]);
     setUser({
       name: "",
       email: "",
       phone: "",
       password: "",
     });
+  };
+
+  const handleDelete = () => {
+    console.log("deleted");
   };
 
   useEffect(() => {
@@ -88,13 +92,23 @@ function App() {
           </thead>
           <tbody>
             {users.map((item, index) => (
-              <tr>
+              <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
                 <td>{item.password}</td>
-                <td><button>Edit</button><button>Delete</button></td>
+                <td
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <button>Edit</button>
+                  <button onClick={handleDelete}>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
